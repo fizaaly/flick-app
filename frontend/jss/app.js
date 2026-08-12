@@ -160,14 +160,15 @@ async function loadFeed(reset) {
   var cont=document.getElementById('feed-list');
   if(reset&&cont) cont.innerHTML=skelHtml(3);
   try {
-    var d=await PostsAPI.feed(APP.feedPage);
-    if(reset&&cont) cont.innerHTML='';
-    if(!d.posts.length&&reset&&cont){
+    const d = await PostsAPI.feed(APP.feedPage);
+    if (reset && cont) cont.innerHTML = '';
+    const posts = (d && d.posts) ? d.posts : [];
+    if (!posts.length && reset && cont) {
       cont.innerHTML='<div class="empty-state"><div class="empty-ico">📸</div><h3>No posts yet</h3><p>Create your first post!</p></div>';
     } else {
-      d.posts.forEach(function(p){if(cont) cont.appendChild(buildPostCard(p));});
+      posts.forEach(function(p){if(cont) cont.appendChild(buildPostCard(p));});
     }
-    APP.feedHasMore=d.has_more;
+    APP.feedHasMore = d && d.has_more;
     APP.feedPage++;
   } catch(e){
     if(reset&&cont) cont.innerHTML='<div class="empty-state"><div class="empty-ico">⚠️</div><h3>Could not load</h3><p>'+esc(e.message)+'</p><button class="btn-grad sm" onclick="loadFeed()" style="margin-top:12px">Try again</button></div>';
@@ -287,7 +288,7 @@ async function loadExploreGrid(reset){
     var d=await PostsAPI.explore(APP.explorePage,APP.exploreQ);
     if(reset)grid.innerHTML='';
     if(!d.posts.length&&reset){grid.innerHTML='<div class="empty-state" style="grid-column:1/-1"><div class="empty-ico">🔍</div><h3>Nothing found</h3></div>';return;}
-    d.posts.forEach(function(p,i){
+    posts.forEach(function(p,i){
       var item=document.createElement('div');item.className='explore-item';
       var imgs=p.images||[];
       if(imgs.length){item.innerHTML='<img src="'+imgs[0].url+'" loading="lazy"/><div class="explore-overlay"><span><i class="fa-solid fa-heart"></i> '+fmtNum(p.likes)+'</span><span><i class="fa-solid fa-comment"></i> '+fmtNum(p.comments)+'</span></div>';}
@@ -333,7 +334,7 @@ async function loadProfileGrid(){
   try{
     var d=await UsersAPI.posts(u.username);grid.innerHTML='';
     if(!d.posts.length){grid.innerHTML='<div class="empty-state" style="grid-column:1/-1"><div class="empty-ico">📸</div><h3>No posts yet</h3></div>';return;}
-    d.posts.forEach(function(p,i){
+    posts.forEach(function(p,i){
       var item=document.createElement('div');item.className='explore-item';
       var imgs=p.images||[];
       item.innerHTML=imgs.length?'<img src="'+imgs[0].url+'" loading="lazy"/><div class="explore-overlay"></div>':'<div style="width:100%;height:100%;display:flex;align-items:center;justify-content:center;background:var(--c3);font-size:24px">📝</div>';
@@ -365,7 +366,7 @@ async function loadSavedPosts() {
       grid.innerHTML = '<div class="empty-state" style="grid-column:1/-1"><div class="empty-ico">🔖</div><h3>No saved posts</h3><p>Save posts to see them here</p></div>';
       return;
     }
-    d.posts.forEach(function(p) {
+    posts.forEach(function(p) {
       var item = document.createElement('div'); item.className = 'explore-item';
       var imgs = p.images || [];
       item.innerHTML = imgs.length ? '<img src="'+imgs[0].url+'" loading="lazy"/><div class="explore-overlay"></div>' : '<div style="width:100%;height:100%;display:flex;align-items:center;justify-content:center;background:var(--c3);font-size:24px">📝</div>';
