@@ -1,0 +1,218 @@
+/* ═══════════════════════════════════════════════════
+   FLICK APP - ANIMATIONS
+   ═══════════════════════════════════════════════════ */
+
+/* ── KEYFRAMES ── */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+@keyframes fadeSlideUp {
+  from { opacity: 0; transform: translateY(16px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes slideUp {
+  from { transform: translateY(100%); }
+  to   { transform: translateY(0); }
+}
+
+@keyframes slideDown {
+  from { transform: translateY(-20px); opacity: 0; }
+  to   { transform: translateY(0); opacity: 1; }
+}
+
+@keyframes slideInRight {
+  from { transform: translateX(100%); }
+  to   { transform: translateX(0); }
+}
+
+@keyframes slideInLeft {
+  from { transform: translateX(-100%); }
+  to   { transform: translateX(0); }
+}
+
+@keyframes scaleIn {
+  from { opacity: 0; transform: scale(0.9); }
+  to   { opacity: 1; transform: scale(1); }
+}
+
+@keyframes scaleOut {
+  from { opacity: 1; transform: scale(1); }
+  to   { opacity: 0; transform: scale(0.9); }
+}
+
+@keyframes heartPop {
+  0%   { transform: scale(1); }
+  50%  { transform: scale(1.4); }
+  100% { transform: scale(1); }
+}
+
+@keyframes doubleTapHeart {
+  0%   { opacity: 0; transform: translate(-50%, -50%) scale(0.3); }
+  30%  { opacity: 1; transform: translate(-50%, -50%) scale(1.2); }
+  70%  { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+  100% { opacity: 0; transform: translate(-50%, -50%) scale(1.1); }
+}
+
+@keyframes ripple {
+  0%   { transform: scale(0); opacity: 0.4; }
+  100% { transform: scale(4); opacity: 0; }
+}
+
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}
+
+@keyframes shimmer {
+  0%   { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0.5; }
+}
+
+@keyframes bounce {
+  0%, 100% { transform: translateY(0); }
+  50%       { transform: translateY(-6px); }
+}
+
+@keyframes typingDot {
+  0%, 60%, 100% { transform: translateY(0); opacity: 0.4; }
+  30%            { transform: translateY(-6px); opacity: 1; }
+}
+
+@keyframes msgPop {
+  from { transform: scale(0.85); opacity: 0; }
+  to   { transform: scale(1);    opacity: 1; }
+}
+
+@keyframes notifSlide {
+  from { transform: translateX(40px); opacity: 0; }
+  to   { transform: translateX(0);    opacity: 1; }
+}
+
+@keyframes pageEnter {
+  from { opacity: 0; transform: translateX(24px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes waveform {
+  0%, 100% { height: 4px; }
+  50%       { height: 20px; }
+}
+
+/* ── PAGE TRANSITION ── */
+.page.entering { animation: pageEnter 0.25s cubic-bezier(0.4, 0, 0.2, 1) forwards; }
+
+/* ── SKELETON LOADER - use transform not background-position for perf ── */
+.skeleton {
+  background: linear-gradient(90deg,
+    var(--bg-tertiary) 25%,
+    var(--bg-hover) 50%,
+    var(--bg-tertiary) 75%
+  );
+  background-size: 200% 100%;
+  animation: shimmer 1.4s ease infinite;
+  border-radius: 8px;
+  will-change: background-position;
+}
+.skeleton-circle { border-radius: 50%; }
+.skeleton-post {
+  padding: 16px; display: flex; flex-direction: column; gap: 12px;
+  border-bottom: 1px solid var(--border);
+}
+.skeleton-header { display: flex; align-items: center; gap: 12px; }
+.skeleton-avatar { width: 44px; height: 44px; flex-shrink: 0; }
+.skeleton-lines { flex: 1; display: flex; flex-direction: column; gap: 6px; }
+.skeleton-line { height: 12px; }
+.skeleton-line.short { width: 40%; }
+.skeleton-image { width: 100%; height: 280px; border-radius: 0; }
+.skeleton-actions { display: flex; gap: 12px; }
+.skeleton-btn { width: 60px; height: 28px; }
+
+/* ── RIPPLE EFFECT ── */
+.ripple-container { position: relative; overflow: hidden; }
+.ripple-wave {
+  position: absolute; border-radius: 50%;
+  background: rgba(255,255,255,0.2);
+  animation: ripple 0.6s linear;
+  pointer-events: none;
+}
+
+/* ── DOUBLE TAP HEART ── */
+.double-tap-heart {
+  position: absolute; font-size: 80px;
+  pointer-events: none; z-index: 10;
+  animation: doubleTapHeart 0.8s ease forwards;
+}
+
+/* ── ONLINE STATUS PULSE ── */
+.online-pulse {
+  animation: pulse 2s infinite;
+}
+
+/* ── TYPING INDICATOR ── */
+.typing-indicator {
+  display: flex; align-items: center; gap: 4px;
+  padding: 10px 16px; background: var(--bg-card);
+  border-radius: 18px 18px 18px 4px;
+  border: 1px solid var(--border);
+  align-self: flex-start; width: fit-content;
+}
+.typing-dot {
+  width: 7px; height: 7px; border-radius: 50%;
+  background: var(--text-muted);
+}
+.typing-dot:nth-child(1) { animation: typingDot 1.4s infinite 0s; }
+.typing-dot:nth-child(2) { animation: typingDot 1.4s infinite 0.2s; }
+.typing-dot:nth-child(3) { animation: typingDot 1.4s infinite 0.4s; }
+
+/* ── VOICE WAVEFORM ── */
+.voice-bar-animated {
+  animation: waveform 0.6s ease-in-out infinite alternate;
+}
+
+/* ── NAV ACTIVE INDICATOR ── */
+.bottom-nav-item.active i {
+  animation: bounce 0.4s cubic-bezier(0.17, 0.89, 0.32, 1.49);
+}
+
+/* ── STORY RING GLOW ── */
+.story-avatar-wrap:not(.seen):hover {
+  box-shadow: 0 0 0 3px rgba(124,58,237,0.4), 0 0 20px rgba(236,72,153,0.3);
+}
+
+/* ── FLOATING LABEL ── */
+.float-label {
+  animation: fadeSlideUp 0.3s ease;
+}
+
+/* ── NOTIFICATION BADGE ANIMATE ── */
+.badge-new {
+  animation: scaleIn 0.3s cubic-bezier(0.17, 0.89, 0.32, 1.49);
+}
+
+/* ── STAGGER CHILDREN ── */
+.stagger-children > *:nth-child(1) { animation-delay: 0ms; }
+.stagger-children > *:nth-child(2) { animation-delay: 60ms; }
+.stagger-children > *:nth-child(3) { animation-delay: 120ms; }
+.stagger-children > *:nth-child(4) { animation-delay: 180ms; }
+.stagger-children > *:nth-child(5) { animation-delay: 240ms; }
+.stagger-children > *:nth-child(6) { animation-delay: 300ms; }
+.stagger-children > *:nth-child(7) { animation-delay: 360ms; }
+.stagger-children > *:nth-child(8) { animation-delay: 420ms; }
+.stagger-children > *:nth-child(9) { animation-delay: 480ms; }
+.stagger-children > *:nth-child(10) { animation-delay: 540ms; }
+
+/* ── PRESS EFFECT ── */
+.pressable { transition: transform var(--transition); }
+.pressable:active { transform: scale(0.96); }
+
+/* ── GLOW EFFECT ── */
+.glow-accent { box-shadow: 0 0 20px rgba(124,58,237,0.4); }
+.glow-pink   { box-shadow: 0 0 20px rgba(236,72,153,0.4); }
