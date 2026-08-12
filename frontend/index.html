@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en" data-theme="dark">
 <head>
 <meta charset="UTF-8"/>
@@ -214,8 +214,8 @@
         </div>
       </div>
       <div class="profile-info-block">
-        <div class="profile-name" id="profile-name">—</div>
-        <div class="profile-uname" id="profile-uname">@—</div>
+        <div class="profile-name" id="profile-name">â€”</div>
+        <div class="profile-uname" id="profile-uname">@â€”</div>
         <div class="profile-bio" id="profile-bio"></div>
       </div>
       <div class="profile-stats-row">
@@ -249,7 +249,7 @@
   </nav>
 </div>
 
-<!-- ───── OVERLAYS ───── -->
+<!-- â”€â”€â”€â”€â”€ OVERLAYS â”€â”€â”€â”€â”€ -->
 
 <!-- Story viewer -->
 <div id="story-overlay" class="overlay" style="display:none">
@@ -269,9 +269,9 @@
   <div class="story-bottom-row">
     <input class="story-reply-inp" id="story-reply-inp" placeholder="Reply to story..."/>
     <button class="ico-btn glass-btn" onclick="sendStoryReply()"><i class="fa-solid fa-paper-plane"></i></button>
-    <button class="glass-btn emoji-react-btn" onclick="storyReact('❤️')">❤️</button>
-    <button class="glass-btn emoji-react-btn" onclick="storyReact('🔥')">🔥</button>
-    <button class="glass-btn emoji-react-btn" onclick="storyReact('😍')">😍</button>
+    <button class="glass-btn emoji-react-btn" onclick="storyReact('â¤ï¸')">â¤ï¸</button>
+    <button class="glass-btn emoji-react-btn" onclick="storyReact('ðŸ”¥')">ðŸ”¥</button>
+    <button class="glass-btn emoji-react-btn" onclick="storyReact('ðŸ˜')">ðŸ˜</button>
   </div>
 </div>
 
@@ -300,7 +300,7 @@
         <img id="create-av" src="" onerror="this.src=''" class="create-av"/>
         <div>
           <div class="create-uname" id="create-uname">You</div>
-          <select class="audience-sel" id="post-audience"><option value="public">🌍 Everyone</option><option value="friends">👥 Friends</option><option value="private">🔒 Only Me</option></select>
+          <select class="audience-sel" id="post-audience"><option value="public">ðŸŒ Everyone</option><option value="friends">ðŸ‘¥ Friends</option><option value="private">ðŸ”’ Only Me</option></select>
         </div>
       </div>
       <textarea id="post-text" class="post-textarea" placeholder="What's on your mind?"></textarea>
@@ -344,7 +344,7 @@
 </div>
 
 <!-- Settings modal -->
-<div id="settings-overlay" class="overlay sheet-overlay" style="display:none" onclick="closeSettings(event)">
+<div id="settings-overlay" class="overlay sheet-overlay" style="z-index:1800" style="display:none" onclick="closeSettings(event)">
   <div class="sheet" onclick="e=>e.stopPropagation()" style="max-height:95vh">
     <div class="sheet-head">
       <div style="display:flex;align-items:center;gap:10px">

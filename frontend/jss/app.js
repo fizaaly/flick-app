@@ -686,7 +686,7 @@ function makeModal(title, bodyHtml) {
   if (existing) existing.remove();
   var modal = document.createElement('div');
   modal.id = 'settings-modal-dynamic';
-  modal.style.cssText = 'position:fixed;inset:0;z-index:800;background:rgba(0,0,0,.7);display:flex;align-items:flex-end;justify-content:center';
+  modal.style.cssText = 'position:fixed;inset:0;z-index:2000;background:rgba(0,0,0,.7);display:flex;align-items:flex-end;justify-content:center';
   modal.onclick = function(e) { if (e.target === modal) modal.remove(); };
   var sheet = document.createElement('div');
   sheet.style.cssText = 'background:var(--c4);border-radius:20px 20px 0 0;width:100%;max-width:560px;max-height:88vh;overflow-y:auto;animation:slideUp .22s ease;border:1px solid var(--b)';

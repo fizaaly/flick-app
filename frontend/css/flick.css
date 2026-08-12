@@ -1,6 +1,6 @@
-/* ══════════════════════════════════════════
-   FLICK CSS — Fast, Clean, App-like
-══════════════════════════════════════════ */
+﻿/* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+   FLICK CSS â€” Fast, Clean, App-like
+â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
 :root{
   --acc:#7C3AED; --acc2:#EC4899; --acc3:#F59E0B;
   --grad:linear-gradient(135deg,#7C3AED,#EC4899);
@@ -28,7 +28,7 @@ a{cursor:pointer;color:var(--acc)}
 ::-webkit-scrollbar{width:3px;height:3px}
 ::-webkit-scrollbar-thumb{background:var(--b);border-radius:99px}
 .hidden{display:none!important}
-/* ── SPLASH ── */
+/* â”€â”€ SPLASH â”€â”€ */
 .splash{position:fixed;inset:0;z-index:9999;background:var(--c1);display:flex;align-items:center;justify-content:center}
 .splash-inner{text-align:center}
 .splash-icon{width:72px;height:72px;border-radius:22px;background:var(--grad);display:flex;align-items:center;justify-content:center;font-size:32px;color:#fff;margin:0 auto 14px;box-shadow:0 12px 40px rgba(124,58,237,.5);animation:splashPop .6s .2s both}
@@ -38,7 +38,7 @@ a{cursor:pointer;color:var(--acc)}
 @keyframes splashPop{from{opacity:0;transform:scale(.6)}to{opacity:1;transform:scale(1)}}
 @keyframes fadeUp{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
 @keyframes fillBar{from{width:0}to{width:100%}}
-/* ── AUTH ── */
+/* â”€â”€ AUTH â”€â”€ */
 .auth-wrap{position:fixed;inset:0;z-index:900;display:flex;align-items:center;justify-content:center;padding:20px;overflow-y:auto}
 .auth-bg{position:fixed;inset:0;background:radial-gradient(ellipse at 30% 20%,rgba(124,58,237,.2),transparent 50%),radial-gradient(ellipse at 70% 80%,rgba(236,72,153,.15),transparent 50%)}
 .auth-box{position:relative;z-index:1;width:100%;max-width:420px;background:var(--c4);border:1px solid var(--b);border-radius:24px;padding:36px 32px;box-shadow:var(--sh);animation:fadeUp .4s ease}
@@ -67,7 +67,7 @@ a{cursor:pointer;color:var(--acc)}
 .auth-switch{text-align:center;font-size:14px;color:var(--t2)}
 .auth-switch a{color:var(--acc);font-weight:600}
 
-/* ── APP LAYOUT ── */
+/* â”€â”€ APP LAYOUT â”€â”€ */
 .app-wrap{display:flex;height:100dvh;width:100vw;overflow:hidden}
 /* SIDEBAR */
 .sidebar{width:var(--sb);background:var(--c2);border-right:1px solid var(--b);display:flex;flex-direction:column;padding:18px 10px;gap:4px;flex-shrink:0;transition:width var(--tr);overflow:hidden}
@@ -136,7 +136,7 @@ a{cursor:pointer;color:var(--acc)}
 .btn-outline{padding:9px 18px;border-radius:99px;border:1.5px solid var(--b);background:var(--c3);font-size:14px;font-weight:500;transition:all var(--tr)}
 .btn-outline:hover{border-color:var(--acc);color:var(--acc)}
 
-/* ── STORIES ── */
+/* â”€â”€ STORIES â”€â”€ */
 .stories-wrap{background:var(--c1);border-bottom:1px solid var(--b);padding:12px 0 8px}
 .stories-row{display:flex;gap:12px;overflow-x:auto;padding:0 14px;-ms-overflow-style:none;scrollbar-width:none}
 .stories-row::-webkit-scrollbar{display:none}
@@ -148,7 +148,7 @@ a{cursor:pointer;color:var(--acc)}
 .story-av{width:100%;height:100%;border-radius:50%;border:2.5px solid var(--c1);object-fit:cover;background:var(--c3)}
 .story-add-plus{position:absolute;bottom:0;right:0;width:22px;height:22px;border-radius:50%;background:var(--acc);color:#fff;font-size:11px;display:flex;align-items:center;justify-content:center;border:2px solid var(--c1);z-index:1}
 .story-item span{font-size:12px;color:var(--t2);max-width:66px;text-align:center;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
-/* ── FEED POSTS ── */
+/* â”€â”€ FEED POSTS â”€â”€ */
 .post-card{background:var(--c1);border-bottom:1px solid var(--b);animation:postIn .35s ease both}
 @keyframes postIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
 .post-hd{display:flex;align-items:center;padding:12px 14px;gap:11px}
@@ -189,7 +189,7 @@ a{cursor:pointer;color:var(--acc)}
 /* DOUBLE TAP HEART */
 .dtap-heart{position:absolute;font-size:80px;pointer-events:none;z-index:10;animation:dtHeart .8s ease forwards}
 @keyframes dtHeart{0%{opacity:0;transform:translate(-50%,-50%) scale(.3)}30%{opacity:1;transform:translate(-50%,-50%) scale(1.2)}70%{opacity:1;transform:translate(-50%,-50%) scale(1)}100%{opacity:0;transform:translate(-50%,-50%) scale(1.1)}}
-/* ── EXPLORE ── */
+/* â”€â”€ EXPLORE â”€â”€ */
 .explore-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;padding:2px}
 .explore-item{aspect-ratio:1;position:relative;background:var(--c3);overflow:hidden;cursor:pointer}
 .explore-item:nth-child(7n+1){grid-column:span 2;grid-row:span 2}
@@ -209,7 +209,7 @@ a{cursor:pointer;color:var(--acc)}
 .pcard-user{font-size:12px;color:var(--t3)}
 .pcard-follow{padding:5px 14px;border-radius:99px;background:var(--acc);color:#fff;font-size:12px;font-weight:600;border:none;cursor:pointer;transition:opacity var(--tr)}
 .pcard-follow:hover{opacity:.85}
-/* ── REELS ── */
+/* â”€â”€ REELS â”€â”€ */
 .reels-tab{padding:0!important;overflow:hidden!important}
 .reels-cont{height:100%;overflow-y:scroll;scroll-snap-type:y mandatory;-ms-overflow-style:none;scrollbar-width:none}
 .reels-cont::-webkit-scrollbar{display:none}
@@ -231,7 +231,7 @@ a{cursor:pointer;color:var(--acc)}
 .reel-act button:hover{background:rgba(255,255,255,.28);transform:scale(1.08)}
 .reel-act span{color:#fff;font-size:12px;font-weight:600}
 
-/* ── CHAT ── */
+/* â”€â”€ CHAT â”€â”€ */
 .chat-tab{flex-direction:row!important;overflow:hidden}
 .chat-left{width:340px;flex-shrink:0;display:flex;flex-direction:column;border-right:1px solid var(--b);background:var(--c2);height:100%;overflow:hidden}
 .chat-search-bar{display:flex;align-items:center;gap:9px;background:var(--c3);border-radius:99px;padding:8px 14px;margin:0 14px 10px;border:1px solid var(--b)}
@@ -348,13 +348,13 @@ a{cursor:pointer;color:var(--acc)}
 .msg-rp-btn{font-size:22px;cursor:pointer;transition:transform .15s;background:none;border:none}
 .msg-rp-btn:hover{transform:scale(1.3)}
 
-/* ── SHIMMER ── */
+/* â”€â”€ SHIMMER â”€â”€ */
 @keyframes shimmer {
   0%   { background-position: -200% 0; }
   100% { background-position:  200% 0; }
 }
 
-/* ── MISSING MISC CLASSES ── */
+/* â”€â”€ MISSING MISC CLASSES â”€â”€ */
 .comment-row { display:flex; gap:10px; padding:8px 12px; }
 .com-av { width:30px; height:30px; border-radius:50%; object-fit:cover; flex-shrink:0; background:var(--c3); }
 .feeling-chip-wrap { display:flex; flex-wrap:wrap; gap:6px; padding:0 0 4px; }
@@ -363,8 +363,8 @@ a{cursor:pointer;color:var(--acc)}
 .feeling-grid-wrap { display:grid; grid-template-columns:repeat(4,1fr); gap:4px; max-height:200px; overflow-y:auto; }
 @media(min-width:400px) { .feeling-grid-wrap { grid-template-columns:repeat(5,1fr); } }
 
-/* ── SHEET (bottom drawer) ── */
-.overlay { position:fixed; inset:0; z-index:600; background:rgba(0,0,0,.65); backdrop-filter:blur(4px); align-items:flex-end; justify-content:center; }
+/* â”€â”€ SHEET (bottom drawer) â”€â”€ */
+.overlay { position:fixed; inset:0; z-index:1000; background:rgba(0,0,0,.65); backdrop-filter:blur(4px); align-items:flex-end; justify-content:center; }
 .sheet-overlay { display:flex; }
 .sheet { background:var(--c4); border-radius:24px 24px 0 0; width:100%; max-width:560px; max-height:92vh; overflow-y:auto; border:1px solid var(--b); animation:slideUp .25s cubic-bezier(.4,0,.2,1); }
 .sheet-head { display:flex; align-items:center; justify-content:space-between; padding:18px 18px 14px; border-bottom:1px solid var(--b); position:sticky; top:0; background:var(--c4); border-radius:24px 24px 0 0; z-index:1; }
@@ -392,7 +392,7 @@ a{cursor:pointer;color:var(--acc)}
 .settings-row.danger { color:#EF4444; }
 .settings-row.danger i { color:#EF4444; }
 
-/* ── STORY OVERLAY ── */
+/* â”€â”€ STORY OVERLAY â”€â”€ */
 #story-overlay { position:fixed; inset:0; z-index:700; background:#000; display:none; align-items:center; justify-content:center; flex-direction:column; }
 .story-prog-row { position:absolute; top:12px; left:12px; right:12px; display:flex; gap:4px; z-index:10; }
 .story-top-row { position:absolute; top:40px; left:12px; right:12px; display:flex; align-items:center; justify-content:space-between; z-index:10; }
@@ -407,7 +407,7 @@ a{cursor:pointer;color:var(--acc)}
 .story-reply-inp::placeholder { color:rgba(255,255,255,.5); }
 .emoji-react-btn { background:rgba(255,255,255,.12); border:1px solid rgba(255,255,255,.2); border-radius:99px; padding:8px; font-size:18px; cursor:pointer; }
 
-/* ── POST OVERLAY ── */
+/* â”€â”€ POST OVERLAY â”€â”€ */
 #post-overlay { position:fixed; inset:0; z-index:600; background:rgba(0,0,0,.8); display:none; align-items:center; justify-content:center; padding:16px; }
 .post-modal { background:var(--c4); border-radius:16px; width:100%; max-width:880px; max-height:90vh; overflow:hidden; display:flex; animation:scaleIn .22s ease; }
 .post-modal-media { width:52%; background:#000; flex-shrink:0; }
@@ -420,7 +420,7 @@ a{cursor:pointer;color:var(--acc)}
 .post-modal-comment-bar input { flex:1; background:none; border:none; font-size:14px; color:var(--t1); }
 .post-btn { color:var(--acc); font-weight:700; font-size:14px; }
 
-/* ── PROFILE ── */
+/* â”€â”€ PROFILE â”€â”€ */
 .profile-top-bar { display:flex; justify-content:flex-end; padding:14px 16px; position:sticky; top:0; z-index:10; background:var(--c1); border-bottom:1px solid var(--b); }
 .profile-cover-wrap { position:relative; margin-bottom:54px; }
 .profile-cover { height:200px; background:linear-gradient(135deg,rgba(124,58,237,.6),rgba(236,72,153,.6)); }
@@ -445,7 +445,7 @@ a{cursor:pointer;color:var(--acc)}
 .gtab.active { color:var(--acc); border-color:var(--acc); }
 .profile-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:2px; padding:2px; }
 
-/* ── RESPONSIVE ── */
+/* â”€â”€ RESPONSIVE â”€â”€ */
 @media (max-width: 1024px) {
   .sidebar { width:70px; }
   .sb-name, .sb-item span { display:none; }
@@ -487,7 +487,7 @@ a{cursor:pointer;color:var(--acc)}
 }
 @media (min-width: 1400px) { .sidebar { width:280px; } }
 
-/* ── SETTINGS ICONS ── */
+/* â”€â”€ SETTINGS ICONS â”€â”€ */
 .s-ico {
   width: 34px; height: 34px; border-radius: 9px;
   display: flex; align-items: center; justify-content: center;
@@ -510,7 +510,7 @@ a{cursor:pointer;color:var(--acc)}
 .tog-on { background: var(--acc) !important; }
 .tog-on > div { right: 2px !important; left: auto !important; }
 
-/* ═══ RESPONSIVE - ALL SCREEN SIZES ═══ */
+/* â•â•â• RESPONSIVE - ALL SCREEN SIZES â•â•â• */
 
 /* Small phones (320px - 375px) like iPhone SE */
 @media (max-width: 375px) {
@@ -609,3 +609,28 @@ a{cursor:pointer;color:var(--acc)}
 @media (prefers-color-scheme: light) {
   html { color-scheme: light; }
 }
+
+/* â”€â”€ MOBILE TOUCH FIX â”€â”€ */
+.settings-row,
+.settings-list button,
+.conv-item,
+.pstat,
+.profile-action-row button,
+.gtab,
+.ctab,
+.pill,
+.tag-btn,
+.bn-item,
+.sb-item,
+.story-item,
+.explore-item,
+.post-card,
+.reel-act button,
+.attach-opt,
+.feel-item {
+  cursor: pointer;
+  -webkit-tap-highlight-color: rgba(124,58,237,0.15);
+  touch-action: manipulation;
+}
+/* Prevent double-tap zoom */
+* { touch-action: manipulation; }
