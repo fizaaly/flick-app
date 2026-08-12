@@ -526,7 +526,7 @@ function openPrivacy() {
   var modal = makeModal('Privacy & Security',
     '<div class="settings-list">'+
     '<div class="settings-sect-label">Account Privacy</div>'+
-    '<button class="settings-row" onclick="togglePrivateAccount()"><i class="fa-solid fa-lock"></i> Private Account<span id="private-badge" style="margin-left:auto;background:var(--c3);border-radius:99px;padding:3px 10px;font-size:12px;color:var(--t2)">'+(Auth.getUser()?.is_private ? 'On' : 'Off')+'</span></button>'+
+    '<button class="settings-row" onclick="togglePrivateAccount()"><i class="fa-solid fa-lock"></i> Private Account<span id="private-badge" style="margin-left:auto;background:var(--c3);border-radius:99px;padding:3px 10px;font-size:12px;color:var(--t2)">'+(Auth.getUser() && Auth.getUser().is_private ? 'On' : 'Off')+'</span></button>'+
     '<div class="settings-sect-label">Interactions</div>'+
     '<button class="settings-row"><i class="fa-solid fa-comment-slash"></i> Restrict Comments<span style="margin-left:auto;font-size:12px;color:var(--t3)">Everyone</span></button>'+
     '<button class="settings-row"><i class="fa-solid fa-user-lock"></i> Restrict Messages<span style="margin-left:auto;font-size:12px;color:var(--t3)">Everyone</span></button>'+
@@ -611,10 +611,10 @@ function openActivity() {
   var u = Auth.getUser();
   var modal = makeModal('Your Activity',
     '<div style="padding:16px 18px;display:flex;flex-direction:column;gap:14px">'+
-    '<div style="background:var(--c3);border-radius:14px;padding:16px;display:flex;justify-content:space-between;align-items:center"><div><div style="font-size:13px;color:var(--t3)">Total Posts</div><div style="font-size:28px;font-weight:700">'+(u?.posts_count||0)+'</div></div><i class="fa-solid fa-images" style="font-size:28px;color:var(--acc);opacity:.6"></i></div>'+
-    '<div style="background:var(--c3);border-radius:14px;padding:16px;display:flex;justify-content:space-between;align-items:center"><div><div style="font-size:13px;color:var(--t3)">Followers</div><div style="font-size:28px;font-weight:700">'+(u?.followers||0)+'</div></div><i class="fa-solid fa-users" style="font-size:28px;color:var(--acc);opacity:.6"></i></div>'+
-    '<div style="background:var(--c3);border-radius:14px;padding:16px;display:flex;justify-content:space-between;align-items:center"><div><div style="font-size:13px;color:var(--t3)">Following</div><div style="font-size:28px;font-weight:700">'+(u?.following||0)+'</div></div><i class="fa-solid fa-user-plus" style="font-size:28px;color:var(--acc);opacity:.6"></i></div>'+
-    '<div style="background:var(--c3);border-radius:14px;padding:16px"><div style="font-size:13px;color:var(--t3);margin-bottom:8px">Member since</div><div style="font-size:16px;font-weight:600">'+(u?.created_at ? new Date(u.created_at).toLocaleDateString('en-US',{year:'numeric',month:'long',day:'numeric'}) : 'Today')+'</div></div>'+
+    '<div style="background:var(--c3);border-radius:14px;padding:16px;display:flex;justify-content:space-between;align-items:center"><div><div style="font-size:13px;color:var(--t3)">Total Posts</div><div style="font-size:28px;font-weight:700">'+((u&&u.posts_count?u.posts_count:0)||0)+'</div></div><i class="fa-solid fa-images" style="font-size:28px;color:var(--acc);opacity:.6"></i></div>'+
+    '<div style="background:var(--c3);border-radius:14px;padding:16px;display:flex;justify-content:space-between;align-items:center"><div><div style="font-size:13px;color:var(--t3)">Followers</div><div style="font-size:28px;font-weight:700">'+((u&&u.followers?u.followers:0)||0)+'</div></div><i class="fa-solid fa-users" style="font-size:28px;color:var(--acc);opacity:.6"></i></div>'+
+    '<div style="background:var(--c3);border-radius:14px;padding:16px;display:flex;justify-content:space-between;align-items:center"><div><div style="font-size:13px;color:var(--t3)">Following</div><div style="font-size:28px;font-weight:700">'+((u&&u.following?u.following:0)||0)+'</div></div><i class="fa-solid fa-user-plus" style="font-size:28px;color:var(--acc);opacity:.6"></i></div>'+
+    '<div style="background:var(--c3);border-radius:14px;padding:16px"><div style="font-size:13px;color:var(--t3);margin-bottom:8px">Member since</div><div style="font-size:16px;font-weight:600">'+((u && u.created_at) ? new Date(u.created_at).toLocaleDateString('en-US',{year:'numeric',month:'long',day:'numeric'}) : 'Today')+'</div></div>'+
     '</div>'
   );
 }
