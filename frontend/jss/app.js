@@ -483,18 +483,32 @@ function openSettings() {
     if (nm) nm.textContent = u.name;
     if (un) un.textContent = '@' + u.username;
   }
-  var badge = document.getElementById('theme-badge');
-  if (badge) badge.textContent = APP.theme === 'dark' ? '🌙 Dark' : '☀️ Light';
-  document.getElementById('settings-overlay').style.display = 'flex';
+  updateThemeBadge();
+  var ov = document.getElementById('settings-overlay');
+  ov.style.display = 'flex';
+  ov.style.zIndex  = '1800';
+  /* Fix mobile touch - add touchend listeners to all settings buttons */
+  setTimeout(function() {
+    ov.querySelectorAll('.settings-row, button').forEach(function(btn) {
+      btn.style.cursor = 'pointer';
+      btn.style.webkitTapHighlightColor = 'rgba(124,58,237,0.2)';
+      /* Clone onclick as touchend for iOS */
+      if (btn.getAttribute('onclick') && !btn._touchFixed) {
+        btn._touchFixed = true;
+        var fn = btn.getAttribute('onclick');
+        btn.addEventListener('touchend', function(e) {
+          e.preventDefault();
+          try { eval(fn); } catch(err) {}
+        }, { passive: false });
+      }
+    });
+  }, 100);
 }
 function updateThemeBadge() {
   var badge = document.getElementById('theme-badge');
   if (badge) badge.textContent = APP.theme === 'dark' ? '🌙 Dark' : '☀️ Light';
 }
-function closeSettings(e) {
-  if (!e || e.target === document.getElementById('settings-overlay'))
-    document.getElementById('settings-overlay').style.display = 'none';
-}
+function closeSettings(e) { var ov = document.getElementById('settings-overlay'); if (ov) { ov.style.display='none'; ov.style.zIndex='1800'; } }
 
 function openChangePassword() {
   closeSettings();
