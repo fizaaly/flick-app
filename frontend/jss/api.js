@@ -4,7 +4,7 @@
 // Auto-detect: agar ngrok ya koi aur domain hai to wahi use karo
 const BASE = (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1')
   ? 'http://localhost:5000/api'
-  : window.location.origin + '/api';
+  : 'https://flick-app-production-822e.up.railway.app/api';
 
 /* ── AUTH STORAGE ── */
 const Auth = {
