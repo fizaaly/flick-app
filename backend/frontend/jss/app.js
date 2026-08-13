@@ -951,28 +951,32 @@ document.addEventListener('click', function(e) {
   if (!btn) return;
   var action = btn.getAttribute('data-action');
   var fnMap = {
-    'editProfile':         function(){ editProfile(); closeSettings(); },
-    'changeAvatar':        function(){ changeAvatar(); closeSettings(); },
-    'openChangePassword':  openChangePassword,
-    'openLinkedAccounts':  openLinkedAccounts,
-    'openPrivacy':         openPrivacy,
-    'openBlockedUsers':    openBlockedUsers,
-    'openTwoFactor':       openTwoFactor,
-    'openLoginActivity':   openLoginActivity,
-    'openNotifSettings':   openNotifSettings,
-    'openEmailNotifs':     openEmailNotifs,
-    'toggleThemeSettings': function(){ toggleTheme(); updateThemeBadge(); },
-    'openLanguage':        openLanguage,
-    'openChatSettings':    openChatSettings,
-    'openMediaAutoDownload': openMediaAutoDownload,
-    'openActivity':        openActivity,
-    'openArchivedPosts':   openArchivedPosts,
-    'openHelp':            openHelp,
-    'openReport':          openReport,
-    'openAbout':           openAbout,
-    'confirmDeactivate':   confirmDeactivate,
-    'doLogout':            doLogout,
-    'openSavedPosts':      function(){ goto('profile'); closeSettings(); setTimeout(function(){ switchGridTab(document.querySelectorAll('.gtab')[1],'saved'); },300); },
+    'editProfile':           function(){ closeSettings(); editProfile(); },
+    'changeAvatar':          function(){ closeSettings(); changeAvatar(); },
+    'openChangePassword':    function(){ closeSettings(); openChangePassword(); },
+    'openLinkedAccounts':    function(){ closeSettings(); openLinkedAccounts(); },
+    'openPrivacy':           function(){ closeSettings(); openPrivacy(); },
+    'openBlockedUsers':      function(){ closeSettings(); openBlockedUsers(); },
+    'openTwoFactor':         function(){ closeSettings(); openTwoFactor(); },
+    'openLoginActivity':     function(){ closeSettings(); openLoginActivity(); },
+    'openNotifSettings':     function(){ closeSettings(); openNotifSettings(); },
+    'openEmailNotifs':       function(){ closeSettings(); openEmailNotifs(); },
+    'toggleThemeSettings':   function(){ toggleTheme(); updateThemeBadge(); },
+    'openLanguage':          function(){ closeSettings(); openLanguage(); },
+    'openChatSettings':      function(){ closeSettings(); openChatSettings(); },
+    'openMediaAutoDownload': function(){ closeSettings(); openMediaAutoDownload(); },
+    'openActivity':          function(){ closeSettings(); openActivity(); },
+    'openArchivedPosts':     function(){ closeSettings(); openArchivedPosts(); },
+    'openSavedPosts':        function(){ closeSettings(); goto('profile'); setTimeout(function(){ switchGridTab(document.querySelectorAll('.gtab')[1],'saved'); },300); },
+    'openHelp':              function(){ closeSettings(); openHelp(); },
+    'openReport':            function(){ closeSettings(); openReport(); },
+    'openAbout':             function(){ closeSettings(); openAbout(); },
+    'confirmDeactivate':     function(){ closeSettings(); confirmDeactivate(); },
+    'doLogout':              doLogout,
   };
-  if (fnMap[action]) { e.preventDefault(); fnMap[action](); }
-});
+  if (fnMap[action]) {
+    e.preventDefault();
+    e.stopPropagation();
+    fnMap[action]();
+  }
+}, true); /* useCapture=true - fires before any other handler */
