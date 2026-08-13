@@ -72,7 +72,7 @@ def create_app():
         return jsonify({'status': 'ok', 'app': 'Flick API'}), 200
 
     # Serve frontend
-    frontend = os.path.join(os.path.dirname(__file__), '..', 'frontend')
+    frontend = os.path.join(os.path.dirname(__file__), 'frontend')
 
     @app.route('/')
     @app.route('/<path:path>')

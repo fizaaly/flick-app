@@ -1,0 +1,547 @@
+﻿<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover"/>
+<meta name="mobile-web-app-capable" content="yes"/>
+<meta name="apple-mobile-web-app-capable" content="yes"/>
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"/>
+<meta name="apple-mobile-web-app-title" content="Flick"/>
+<meta name="theme-color" content="#7C3AED"/>
+<meta name="description" content="Connect. Share. Vibe."/>
+<title>Flick</title>
+<link rel="manifest" href="/manifest.json"/>
+<link rel="apple-touch-icon" href="/icons/apple-touch-icon.png"/>
+<link rel="icon" type="image/png" sizes="192x192" href="/icons/icon-192.png"/>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet"/>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+<link rel="stylesheet" href="css/flick.css"/>
+</head>
+<body>
+
+<!-- SPLASH -->
+<div id="splash" class="splash">
+  <div class="splash-inner">
+    <div class="splash-icon"><i class="fa-solid fa-bolt-lightning"></i></div>
+    <div class="splash-name">Flick</div>
+    <div class="splash-bar"><div class="splash-fill"></div></div>
+  </div>
+</div>
+
+<!-- AUTH -->
+<div id="auth" class="auth-wrap" style="display:none">
+  <div class="auth-bg"></div>
+  <div class="auth-box">
+    <div class="auth-logo">
+      <div class="auth-logo-icon"><i class="fa-solid fa-bolt-lightning"></i></div>
+      <div class="auth-logo-name">Flick</div>
+    </div>
+
+    <!-- Login -->
+    <div id="form-login" class="auth-form">
+      <div class="auth-title">Welcome back</div>
+      <div class="auth-sub">Sign in to continue</div>
+      <div class="field-wrap">
+        <i class="fa-solid fa-user field-icon"></i>
+        <input id="l-user" type="text" placeholder="Username or Email" class="field-input"/>
+      </div>
+      <div class="field-wrap">
+        <i class="fa-solid fa-lock field-icon"></i>
+        <input id="l-pass" type="password" placeholder="Password" class="field-input"/>
+        <button class="eye-btn" onclick="toggleEye('l-pass',this)"><i class="fa-solid fa-eye"></i></button>
+      </div>
+      <button class="btn-grad" id="login-btn" onclick="doLogin()">Sign In</button>
+      <div class="auth-or"><span>or</span></div>
+      <div class="social-row">
+        <button class="social-btn" onclick="switchForm('register')"><i class="fa-brands fa-google"></i> Sign up with Google</button>
+        <button class="social-btn" onclick="switchForm('register')"><i class="fa-brands fa-apple"></i> Sign up with Apple</button>
+      </div>
+      <div class="auth-switch">No account? <a onclick="switchForm('register')">Sign Up</a></div>
+    </div>
+
+    <!-- Register -->
+    <div id="form-register" class="auth-form" style="display:none">
+      <div class="auth-title">Create account</div>
+      <div class="auth-sub">Join Flick today</div>
+      <div class="field-wrap">
+        <i class="fa-solid fa-user field-icon"></i>
+        <input id="r-name" type="text" placeholder="Full Name" class="field-input"/>
+      </div>
+      <div class="field-wrap">
+        <i class="fa-solid fa-at field-icon"></i>
+        <input id="r-user" type="text" placeholder="Username" class="field-input"/>
+      </div>
+      <div class="field-wrap">
+        <i class="fa-solid fa-envelope field-icon"></i>
+        <input id="r-email" type="email" placeholder="Email" class="field-input"/>
+      </div>
+      <div class="field-wrap">
+        <i class="fa-solid fa-lock field-icon"></i>
+        <input id="r-pass" type="password" placeholder="Password (min 6)" class="field-input"/>
+        <button class="eye-btn" onclick="toggleEye('r-pass',this)"><i class="fa-solid fa-eye"></i></button>
+      </div>
+      <button class="btn-grad" id="reg-btn" onclick="doRegister()">Create Account</button>
+      <div class="auth-switch">Have account? <a onclick="switchForm('login')">Sign In</a></div>
+    </div>
+  </div>
+</div>
+
+<!-- MAIN APP -->
+<div id="app" style="display:none" class="app-wrap">
+
+  <!-- Sidebar (desktop/tablet) -->
+  <aside class="sidebar" id="sidebar">
+    <div class="sb-logo">
+      <div class="sb-icon"><i class="fa-solid fa-bolt-lightning"></i></div>
+      <span class="sb-name">Flick</span>
+    </div>
+    <nav class="sb-nav">
+      <button class="sb-item active" data-tab="feed"          onclick="goto('feed',this)"><i class="fa-solid fa-house"></i><span>Home</span></button>
+      <button class="sb-item"        data-tab="explore"       onclick="goto('explore',this)"><i class="fa-solid fa-compass"></i><span>Explore</span></button>
+      <button class="sb-item"        data-tab="reels"         onclick="goto('reels',this)"><i class="fa-solid fa-film"></i><span>Reels</span></button>
+      <button class="sb-item"        data-tab="chat"          onclick="goto('chat',this)"><i class="fa-solid fa-message"></i><span class="sb-badge" id="sb-msg-badge" style="display:none">0</span><span>Messages</span></button>
+      <button class="sb-item"        data-tab="notifications" onclick="goto('notifications',this)"><i class="fa-solid fa-bell"></i><span>Activity</span></button>
+      <button class="sb-item"        data-tab="profile"       onclick="goto('profile',this)"><i class="fa-solid fa-user"></i><span>Profile</span></button>
+    </nav>
+    <div class="sb-bottom">
+      <button class="sb-item create-item" onclick="openCreate()"><div class="create-circle"><i class="fa-solid fa-plus"></i></div><span>Create</span></button>
+      <button class="sb-item" onclick="toggleTheme()"><i class="fa-solid fa-circle-half-stroke" id="theme-ico"></i><span>Theme</span></button>
+      <button class="sb-item" onclick="doLogout()"><i class="fa-solid fa-right-from-bracket"></i><span>Logout</span></button>
+    </div>
+  </aside>
+
+  <!-- Main content -->
+  <main class="main-area" id="main-area">
+
+    <!-- FEED PAGE -->
+    <div id="tab-feed" class="tab active">
+      <div class="page-head">
+        <div class="head-logo"><i class="fa-solid fa-bolt-lightning"></i> Flick</div>
+        <div class="head-actions">
+          <button class="ico-btn" onclick="goto('explore',null)"><i class="fa-solid fa-magnifying-glass"></i></button>
+          <button class="ico-btn pos-rel" onclick="goto('chat',null)"><i class="fa-solid fa-message"></i><span class="dot-badge" id="msg-dot" style="display:none"></span></button>
+        </div>
+      </div>
+      <!-- Stories -->
+      <div class="stories-wrap">
+        <div class="stories-row" id="stories-row">
+          <div class="story-item add-story" onclick="openAddStory()">
+            <div class="story-ring no-ring"><div class="story-add-plus"><i class="fa-solid fa-plus"></i></div><div class="story-av" id="my-story-av" style="background:var(--c3)"></div></div>
+            <span>Your Story</span>
+          </div>
+        </div>
+      </div>
+      <!-- Posts -->
+      <div id="feed-list"></div>
+      <div id="feed-loader" style="display:none" class="center-pad"><div class="spin"></div></div>
+    </div>
+
+    <!-- EXPLORE PAGE -->
+    <div id="tab-explore" class="tab">
+      <div class="page-head"><div class="head-title">Explore</div></div>
+      <div class="search-bar">
+        <i class="fa-solid fa-magnifying-glass"></i>
+        <input type="text" placeholder="Search people, posts, tags..." id="explore-q" oninput="onExploreSearch(this.value)"/>
+      </div>
+      <div class="tag-pills" id="explore-tags">
+        <button class="pill active" onclick="filterExplore(this,'all')">All</button>
+        <button class="pill" onclick="filterExplore(this,'photos')">Photos</button>
+        <button class="pill" onclick="filterExplore(this,'video')">Videos</button>
+        <button class="pill" onclick="filterExplore(this,'people')">People</button>
+        <button class="pill" onclick="filterExplore(this,'trending')">Trending</button>
+      </div>
+      <div id="explore-people" class="people-cards" style="display:none"></div>
+      <div id="explore-grid" class="explore-grid"></div>
+    </div>
+
+    <!-- REELS PAGE -->
+    <div id="tab-reels" class="tab reels-tab">
+      <div id="reels-cont" class="reels-cont"></div>
+    </div>
+
+    <!-- CHAT PAGE -->
+    <div id="tab-chat" class="tab chat-tab">
+      <div class="chat-left" id="chat-left">
+        <div class="page-head">
+          <div class="head-title">Messages</div>
+          <button class="ico-btn" onclick="openNewMsg()"><i class="fa-solid fa-pen-to-square"></i></button>
+        </div>
+        <div class="chat-search-bar">
+          <i class="fa-solid fa-magnifying-glass"></i>
+          <input type="text" placeholder="Search messages..." oninput="searchMsgs(this.value)"/>
+        </div>
+        <div class="chat-tabs-row">
+          <button class="ctab active" onclick="switchChatTab(this,'all')">All</button>
+          <button class="ctab" onclick="switchChatTab(this,'unread')">Unread</button>
+          <button class="ctab" onclick="switchChatTab(this,'groups')">Groups</button>
+        </div>
+        <div id="conv-list" class="conv-list"></div>
+      </div>
+      <div class="chat-right" id="chat-right">
+        <div class="chat-empty" id="chat-empty-state">
+          <i class="fa-solid fa-message chat-empty-ico"></i>
+          <div class="chat-empty-title">Your Messages</div>
+          <div class="chat-empty-sub">Send a message to start a conversation</div>
+          <button class="btn-grad sm" onclick="openNewMsg()">New Message</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- NOTIFICATIONS PAGE -->
+    <div id="tab-notifications" class="tab">
+      <div class="page-head">
+        <div class="head-title">Activity</div>
+        <button class="ico-btn" onclick="markAllRead()"><i class="fa-solid fa-check-double"></i></button>
+      </div>
+      <div class="tag-pills">
+        <button class="pill active" onclick="filterNotifs(this,'all')">All</button>
+        <button class="pill" onclick="filterNotifs(this,'likes')">Likes</button>
+        <button class="pill" onclick="filterNotifs(this,'comments')">Comments</button>
+        <button class="pill" onclick="filterNotifs(this,'follows')">Follows</button>
+      </div>
+      <div id="notif-list" class="notif-list"></div>
+    </div>
+
+    <!-- PROFILE PAGE -->
+    <div id="tab-profile" class="tab">
+      <div class="profile-top-bar"><button class="ico-btn" onclick="openSettings()"><i class="fa-solid fa-bars"></i></button></div>
+      <div class="profile-cover-wrap">
+        <div class="profile-cover" id="profile-cover"></div>
+        <div class="profile-av-wrap">
+          <div class="profile-ring"><img id="profile-av" src="" onerror="this.src=''" class="profile-av"/></div>
+          <button class="av-cam-btn" onclick="changeAvatar()"><i class="fa-solid fa-camera"></i></button>
+        </div>
+      </div>
+      <div class="profile-info-block">
+        <div class="profile-name" id="profile-name">â€”</div>
+        <div class="profile-uname" id="profile-uname">@â€”</div>
+        <div class="profile-bio" id="profile-bio"></div>
+      </div>
+      <div class="profile-stats-row">
+        <div class="pstat" onclick="showPostsCount()"><span id="ps-posts">0</span><label>Posts</label></div>
+        <div class="pstat" onclick="showFollowers()"><span id="ps-followers">0</span><label>Followers</label></div>
+        <div class="pstat" onclick="showFollowing()"><span id="ps-following">0</span><label>Following</label></div>
+      </div>
+      <div class="profile-action-row">
+        <button class="btn-outline" onclick="editProfile()"><i class="fa-solid fa-pen"></i> Edit Profile</button>
+        <button class="ico-btn" onclick="shareProfile()"><i class="fa-solid fa-share-nodes"></i></button>
+        <button class="ico-btn" onclick="openSettings()"><i class="fa-solid fa-gear"></i></button>
+      </div>
+      <div class="profile-grid-tabs">
+        <button class="gtab active" onclick="switchGridTab(this,'posts')"><i class="fa-solid fa-grid-2"></i></button>
+        <button class="gtab" onclick="switchGridTab(this,'reels')"><i class="fa-solid fa-film"></i></button>
+        <button class="gtab" onclick="switchGridTab(this,'saved')"><i class="fa-solid fa-bookmark"></i></button>
+        <button class="gtab" onclick="switchGridTab(this,'tagged')"><i class="fa-solid fa-tag"></i></button>
+      </div>
+      <div id="profile-grid" class="profile-grid"></div>
+    </div>
+
+  </main>
+
+  <!-- Bottom nav (mobile) -->
+  <nav class="bottom-nav" id="bnav">
+    <button class="bn-item active" data-tab="feed"    onclick="goto('feed',this)"><i class="fa-solid fa-house"></i><span>Home</span></button>
+    <button class="bn-item" data-tab="explore"        onclick="goto('explore',this)"><i class="fa-solid fa-compass"></i><span>Explore</span></button>
+    <button class="bn-item fab-btn"                   onclick="openCreate()"><div class="fab"><i class="fa-solid fa-plus"></i></div></button>
+    <button class="bn-item" data-tab="chat"           onclick="goto('chat',this)"><i class="fa-solid fa-message"></i><span class="dot-badge" id="bn-msg-dot" style="display:none"></span><span>Chat</span></button>
+    <button class="bn-item pos-rel" data-tab="profile" onclick="goto('profile',this)"><i class="fa-solid fa-user"></i><span>Profile</span></button>
+  </nav>
+</div>
+
+<!-- â”€â”€â”€â”€â”€ OVERLAYS â”€â”€â”€â”€â”€ -->
+
+<!-- Story viewer -->
+<div id="story-overlay" class="overlay" style="display:none">
+  <div class="story-bg" id="story-bg"></div>
+  <div class="story-prog-row" id="story-prog-row"></div>
+  <div class="story-top-row">
+    <div class="story-user-row">
+      <img class="story-uav" id="story-uav" src=""/>
+      <div><div class="story-uname" id="story-uname"></div><div class="story-utime" id="story-utime"></div></div>
+    </div>
+    <div style="display:flex;gap:6px">
+      <button class="ico-btn glass-btn" onclick="closeStory()"><i class="fa-solid fa-xmark"></i></button>
+    </div>
+  </div>
+  <div class="story-nav-l" onclick="storyPrev()"></div>
+  <div class="story-nav-r" onclick="storyNext()"></div>
+  <div class="story-bottom-row">
+    <input class="story-reply-inp" id="story-reply-inp" placeholder="Reply to story..."/>
+    <button class="ico-btn glass-btn" onclick="sendStoryReply()"><i class="fa-solid fa-paper-plane"></i></button>
+    <button class="glass-btn emoji-react-btn" onclick="storyReact('â¤ï¸')">â¤ï¸</button>
+    <button class="glass-btn emoji-react-btn" onclick="storyReact('ðŸ”¥')">ðŸ”¥</button>
+    <button class="glass-btn emoji-react-btn" onclick="storyReact('ðŸ˜')">ðŸ˜</button>
+  </div>
+</div>
+
+<!-- Post viewer -->
+<div id="post-overlay" class="overlay" style="display:none" onclick="closePostOverlay(event)">
+  <div class="post-modal" id="post-modal" onclick="e=>e.stopPropagation()">
+    <div class="post-modal-media" id="pm-media"></div>
+    <div class="post-modal-side">
+      <div class="post-modal-head" id="pm-head"></div>
+      <div class="post-modal-comments" id="pm-comments"></div>
+      <div class="post-modal-actions" id="pm-actions"></div>
+      <div class="post-modal-comment-bar">
+        <input type="text" id="pm-comment-inp" placeholder="Add a comment..." onkeydown="if(event.key==='Enter')submitComment()"/>
+        <button onclick="submitComment()" class="post-btn">Post</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Create post -->
+<div id="create-overlay" class="overlay sheet-overlay" style="display:none" onclick="closeCreate(event)">
+  <div class="sheet" onclick="e=>e.stopPropagation()">
+    <div class="sheet-head"><span class="sheet-title">Create Post</span><button class="ico-btn" onclick="closeCreate()"><i class="fa-solid fa-xmark"></i></button></div>
+    <div class="sheet-body">
+      <div class="create-user-row">
+        <img id="create-av" src="" onerror="this.src=''" class="create-av"/>
+        <div>
+          <div class="create-uname" id="create-uname">You</div>
+          <select class="audience-sel" id="post-audience"><option value="public">ðŸŒ Everyone</option><option value="friends">ðŸ‘¥ Friends</option><option value="private">ðŸ”’ Only Me</option></select>
+        </div>
+      </div>
+      <textarea id="post-text" class="post-textarea" placeholder="What's on your mind?"></textarea>
+      <!-- Feeling chip -->
+      <div id="feeling-chip" style="display:none" class="feeling-chip-wrap"></div>
+      <!-- Media preview -->
+      <div id="create-preview" class="create-preview"></div>
+      <!-- Location -->
+      <div id="loc-row" class="loc-row" style="display:none">
+        <i class="fa-solid fa-location-dot" style="color:var(--acc)"></i>
+        <input type="text" id="loc-inp" placeholder="Add location..." class="loc-input"/>
+      </div>
+      <!-- Tools -->
+      <div class="post-tools-row">
+        <button class="tool-btn" onclick="pickMedia()"><i class="fa-solid fa-image" style="color:#8B5CF6"></i><span>Photo/Video</span></button>
+        <button class="tool-btn" onclick="toggleLocation()"><i class="fa-solid fa-location-dot" style="color:#EF4444"></i><span>Location</span></button>
+        <button class="tool-btn" onclick="tagPeople()"><i class="fa-solid fa-user-tag" style="color:#3B82F6"></i><span>Tag</span></button>
+        <button class="tool-btn" onclick="openFeelings()"><i class="fa-solid fa-face-smile" style="color:#F59E0B"></i><span>Feeling</span></button>
+      </div>
+      <!-- Feeling picker (inline) -->
+      <div id="feeling-picker" style="display:none" class="feeling-picker-inline">
+        <input type="text" class="feeling-search-inp" placeholder="Search feelings..." oninput="filterFeelings(this.value)" id="feeling-search-inp"/>
+        <div class="feeling-grid-wrap" id="feeling-grid"></div>
+      </div>
+      <input type="file" id="media-inp" accept="image/*,video/*" multiple style="display:none" onchange="onMediaPicked(event)"/>
+    </div>
+    <div class="sheet-footer"><button class="btn-grad full" id="post-btn" onclick="submitPost()">Post</button></div>
+  </div>
+</div>
+
+<!-- New message modal -->
+<div id="newmsg-overlay" class="overlay sheet-overlay" style="display:none" onclick="closeNewMsg(event)">
+  <div class="sheet" onclick="e=>e.stopPropagation()">
+    <div class="sheet-head"><span class="sheet-title">New Message</span><button class="ico-btn" onclick="closeNewMsg()"><i class="fa-solid fa-xmark"></i></button></div>
+    <div class="search-bar" style="margin:12px 16px 0">
+      <i class="fa-solid fa-magnifying-glass"></i>
+      <input type="text" placeholder="Search people..." id="nm-search" oninput="searchPeople(this.value)"/>
+    </div>
+    <div id="nm-list" class="nm-list"></div>
+  </div>
+</div>
+
+<!-- Settings modal -->
+<div id="settings-overlay" class="overlay sheet-overlay" style="display:none" style="z-index:1800;display:none" style="display:none" onclick="closeSettings(event)">
+  <div class="sheet" onclick="e=>e.stopPropagation()" style="max-height:95vh">
+    <div class="sheet-head">
+      <div style="display:flex;align-items:center;gap:10px">
+        <div style="width:34px;height:34px;border-radius:10px;background:var(--grad);display:flex;align-items:center;justify-content:center;color:#fff;font-size:14px"><i class="fa-solid fa-gear"></i></div>
+        <span class="sheet-title">Settings</span>
+      </div>
+      <button class="ico-btn" onclick="closeSettings()"><i class="fa-solid fa-xmark"></i></button>
+    </div>
+
+    <!-- Profile preview inside settings -->
+    <div id="settings-profile-preview" style="display:flex;align-items:center;gap:14px;padding:16px 18px;border-bottom:1px solid var(--b);cursor:pointer" onclick="goto('profile');closeSettings()">
+      <img id="settings-av" src="" onerror="this.src=''" style="width:56px;height:56px;border-radius:50%;object-fit:cover;background:var(--c3);flex-shrink:0"/>
+      <div style="flex:1">
+        <div id="settings-name" style="font-weight:700;font-size:16px"></div>
+        <div id="settings-uname" style="font-size:13px;color:var(--t3)"></div>
+      </div>
+      <i class="fa-solid fa-chevron-right" style="color:var(--t3);font-size:13px"></i>
+    </div>
+
+    <div class="settings-list">
+
+      <!-- ACCOUNT -->
+      <div class="settings-sect-label"><i class="fa-solid fa-user" style="margin-right:6px;color:var(--acc)"></i>Account</div>
+      <button class="settings-row" onclick="editProfile();closeSettings()">
+        <div class="s-ico" style="background:#7C3AED22;color:#7C3AED"><i class="fa-solid fa-user-pen"></i></div>
+        Edit Profile
+        <i class="fa-solid fa-chevron-right" style="margin-left:auto;color:var(--t3);font-size:12px"></i>
+      </button>
+      <button class="settings-row" onclick="changeAvatar();closeSettings()">
+        <div class="s-ico" style="background:#06B6D422;color:#06B6D4"><i class="fa-solid fa-camera"></i></div>
+        Change Photo
+        <i class="fa-solid fa-chevron-right" style="margin-left:auto;color:var(--t3);font-size:12px"></i>
+      </button>
+      <button class="settings-row" onclick="openChangePassword()">
+        <div class="s-ico" style="background:#F59E0B22;color:#F59E0B"><i class="fa-solid fa-key"></i></div>
+        Change Password
+        <i class="fa-solid fa-chevron-right" style="margin-left:auto;color:var(--t3);font-size:12px"></i>
+      </button>
+      <button class="settings-row" onclick="openLinkedAccounts()">
+        <div class="s-ico" style="background:#EC489922;color:#EC4899"><i class="fa-solid fa-link"></i></div>
+        Linked Accounts
+        <i class="fa-solid fa-chevron-right" style="margin-left:auto;color:var(--t3);font-size:12px"></i>
+      </button>
+
+      <!-- PRIVACY -->
+      <div class="settings-sect-label"><i class="fa-solid fa-shield-halved" style="margin-right:6px;color:#22C55E"></i>Privacy & Security</div>
+      <button class="settings-row" onclick="openPrivacy()">
+        <div class="s-ico" style="background:#22C55E22;color:#22C55E"><i class="fa-solid fa-lock"></i></div>
+        Privacy Settings
+        <i class="fa-solid fa-chevron-right" style="margin-left:auto;color:var(--t3);font-size:12px"></i>
+      </button>
+      <button class="settings-row" onclick="openBlockedUsers()">
+        <div class="s-ico" style="background:#EF444422;color:#EF4444"><i class="fa-solid fa-ban"></i></div>
+        Blocked Accounts
+        <i class="fa-solid fa-chevron-right" style="margin-left:auto;color:var(--t3);font-size:12px"></i>
+      </button>
+      <button class="settings-row" onclick="openTwoFactor()">
+        <div class="s-ico" style="background:#8B5CF622;color:#8B5CF6"><i class="fa-solid fa-mobile-screen"></i></div>
+        Two-Factor Auth
+        <span style="margin-left:auto;background:#EF444422;color:#EF4444;border-radius:99px;padding:2px 8px;font-size:11px;font-weight:600">Off</span>
+      </button>
+      <button class="settings-row" onclick="openLoginActivity()">
+        <div class="s-ico" style="background:#3B82F622;color:#3B82F6"><i class="fa-solid fa-clock-rotate-left"></i></div>
+        Login Activity
+        <i class="fa-solid fa-chevron-right" style="margin-left:auto;color:var(--t3);font-size:12px"></i>
+      </button>
+
+      <!-- NOTIFICATIONS -->
+      <div class="settings-sect-label"><i class="fa-solid fa-bell" style="margin-right:6px;color:#F59E0B"></i>Notifications</div>
+      <button class="settings-row" onclick="openNotifSettings()">
+        <div class="s-ico" style="background:#F59E0B22;color:#F59E0B"><i class="fa-solid fa-bell"></i></div>
+        Push Notifications
+        <i class="fa-solid fa-chevron-right" style="margin-left:auto;color:var(--t3);font-size:12px"></i>
+      </button>
+      <button class="settings-row" onclick="openEmailNotifs()">
+        <div class="s-ico" style="background:#06B6D422;color:#06B6D4"><i class="fa-solid fa-envelope"></i></div>
+        Email Notifications
+        <i class="fa-solid fa-chevron-right" style="margin-left:auto;color:var(--t3);font-size:12px"></i>
+      </button>
+
+      <!-- MESSAGES (WhatsApp style) -->
+      <div class="settings-sect-label"><i class="fa-solid fa-message" style="margin-right:6px;color:#22C55E"></i>Messages</div>
+      <button class="settings-row" onclick="openChatSettings()">
+        <div class="s-ico" style="background:#22C55E22;color:#22C55E"><i class="fa-solid fa-comment-dots"></i></div>
+        Chat Settings
+        <i class="fa-solid fa-chevron-right" style="margin-left:auto;color:var(--t3);font-size:12px"></i>
+      </button>
+      <button class="settings-row" onclick="openMediaAutoDownload()">
+        <div class="s-ico" style="background:#7C3AED22;color:#7C3AED"><i class="fa-solid fa-download"></i></div>
+        Media Auto-Download
+        <i class="fa-solid fa-chevron-right" style="margin-left:auto;color:var(--t3);font-size:12px"></i>
+      </button>
+
+      <!-- APPEARANCE -->
+      <div class="settings-sect-label"><i class="fa-solid fa-palette" style="margin-right:6px;color:#EC4899"></i>Appearance</div>
+      <button class="settings-row" onclick="toggleTheme();updateThemeBadge()">
+        <div class="s-ico" style="background:#EC489922;color:#EC4899"><i class="fa-solid fa-circle-half-stroke"></i></div>
+        Dark / Light Mode
+        <span id="theme-badge" style="margin-left:auto;background:var(--c3);border-radius:99px;padding:3px 10px;font-size:12px;color:var(--t2)">Dark</span>
+      </button>
+      <button class="settings-row" onclick="openLanguage()">
+        <div class="s-ico" style="background:#3B82F622;color:#3B82F6"><i class="fa-solid fa-language"></i></div>
+        Language
+        <span style="margin-left:auto;font-size:13px;color:var(--t3)">English</span>
+      </button>
+
+      <!-- CONTENT -->
+      <div class="settings-sect-label"><i class="fa-solid fa-photo-film" style="margin-right:6px;color:#8B5CF6"></i>Content</div>
+      <button class="settings-row" onclick="goto('profile');switchGridTab(document.querySelectorAll('.gtab')[1],'saved');closeSettings()">
+        <div class="s-ico" style="background:#8B5CF622;color:#8B5CF6"><i class="fa-solid fa-bookmark"></i></div>
+        Saved Posts
+        <i class="fa-solid fa-chevron-right" style="margin-left:auto;color:var(--t3);font-size:12px"></i>
+      </button>
+      <button class="settings-row" onclick="openActivity()">
+        <div class="s-ico" style="background:#F59E0B22;color:#F59E0B"><i class="fa-solid fa-chart-line"></i></div>
+        Your Activity
+        <i class="fa-solid fa-chevron-right" style="margin-left:auto;color:var(--t3);font-size:12px"></i>
+      </button>
+      <button class="settings-row" onclick="openArchivedPosts()">
+        <div class="s-ico" style="background:#6B728022;color:#6B7280"><i class="fa-solid fa-box-archive"></i></div>
+        Archive
+        <i class="fa-solid fa-chevron-right" style="margin-left:auto;color:var(--t3);font-size:12px"></i>
+      </button>
+
+      <!-- SUPPORT -->
+      <div class="settings-sect-label"><i class="fa-solid fa-circle-question" style="margin-right:6px;color:#06B6D4"></i>Help & Support</div>
+      <button class="settings-row" onclick="openHelp()">
+        <div class="s-ico" style="background:#06B6D422;color:#06B6D4"><i class="fa-solid fa-circle-question"></i></div>
+        Help Center
+        <i class="fa-solid fa-chevron-right" style="margin-left:auto;color:var(--t3);font-size:12px"></i>
+      </button>
+      <button class="settings-row" onclick="openReport()">
+        <div class="s-ico" style="background:#EF444422;color:#EF4444"><i class="fa-solid fa-flag"></i></div>
+        Report a Problem
+        <i class="fa-solid fa-chevron-right" style="margin-left:auto;color:var(--t3);font-size:12px"></i>
+      </button>
+      <button class="settings-row" onclick="openAbout()">
+        <div class="s-ico" style="background:#7C3AED22;color:#7C3AED"><i class="fa-solid fa-circle-info"></i></div>
+        About Flick
+        <i class="fa-solid fa-chevron-right" style="margin-left:auto;color:var(--t3);font-size:12px"></i>
+      </button>
+
+      <!-- DANGER -->
+      <div class="settings-sect-label"><i class="fa-solid fa-triangle-exclamation" style="margin-right:6px;color:#EF4444"></i>Account Actions</div>
+      <button class="settings-row" onclick="confirmDeactivate()">
+        <div class="s-ico" style="background:#EF444422;color:#EF4444"><i class="fa-solid fa-user-slash"></i></div>
+        <span style="color:#EF4444">Deactivate Account</span>
+      </button>
+      <button class="settings-row danger" onclick="doLogout()" style="margin-bottom:20px">
+        <div class="s-ico" style="background:#EF444422;color:#EF4444"><i class="fa-solid fa-right-from-bracket"></i></div>
+        Log Out
+      </button>
+
+    </div>
+  </div>
+</div>
+
+<!-- Emoji picker for chat -->
+<div id="emoji-panel" class="emoji-panel" style="display:none"></div>
+
+<!-- Attach menu for chat -->
+<div id="attach-panel" class="attach-panel" style="display:none">
+  <button class="attach-opt" onclick="chatPickMedia()"><div class="att-ico" style="background:linear-gradient(135deg,#7C3AED,#EC4899)"><i class="fa-solid fa-image"></i></div><span>Gallery</span></button>
+  <button class="attach-opt" onclick="chatPickCamera()"><div class="att-ico" style="background:linear-gradient(135deg,#0EA5E9,#06B6D4)"><i class="fa-solid fa-camera"></i></div><span>Camera</span></button>
+  <button class="attach-opt" onclick="chatPickDoc()"><div class="att-ico" style="background:linear-gradient(135deg,#F59E0B,#EF4444)"><i class="fa-solid fa-file-alt"></i></div><span>Document</span></button>
+  <button class="attach-opt" onclick="chatPickAudio()"><div class="att-ico" style="background:linear-gradient(135deg,#22C55E,#06B6D4)"><i class="fa-solid fa-music"></i></div><span>Audio</span></button>
+  <button class="attach-opt" onclick="chatSendLocation()"><div class="att-ico" style="background:linear-gradient(135deg,#EF4444,#F59E0B)"><i class="fa-solid fa-location-dot"></i></div><span>Location</span></button>
+</div>
+<input type="file" id="chat-media-inp"  accept="image/*,video/*" multiple style="display:none" onchange="onChatFile(event,'media')"/>
+<input type="file" id="chat-camera-inp" accept="image/*" capture="environment" style="display:none" onchange="onChatFile(event,'media')"/>
+<input type="file" id="chat-doc-inp"    accept=".pdf,.doc,.docx,.xls,.xlsx,.ppt,.pptx,.txt,.zip" multiple style="display:none" onchange="onChatFile(event,'doc')"/>
+<input type="file" id="chat-audio-inp"  accept="audio/*" style="display:none" onchange="onChatFile(event,'audio')"/>
+
+<!-- Chat media preview bar -->
+<div id="chat-prev-bar" class="chat-prev-bar" style="display:none"></div>
+
+<!-- Toast -->
+<div id="toast" class="toast"></div>
+
+<!-- Image full view -->
+<div id="img-view" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,.95);z-index:9999;display:none;align-items:center;justify-content:center;cursor:zoom-out" onclick="this.style.display='none'">
+  <img id="img-view-src" style="max-width:95vw;max-height:95vh;object-fit:contain;border-radius:8px"/>
+</div>
+
+<script src="jss/api.js"></script>
+<script src="jss/app.js"></script>
+<script src="jss/stories.js"></script>
+<script src="jss/chat.js"></script>
+<script>
+  /* Register Service Worker for PWA */
+  if ('serviceWorker' in navigator) {
+    window.addEventListener('load', function() {
+      navigator.serviceWorker.register('/sw.js')
+        .then(function(reg) { console.log('SW registered'); })
+        .catch(function(e) { console.log('SW error:', e); });
+    });
+  }
+</script>
+</body>
+</html>
