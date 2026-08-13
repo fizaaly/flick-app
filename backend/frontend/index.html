@@ -368,22 +368,22 @@
 
       <!-- ACCOUNT -->
       <div class="settings-sect-label"><i class="fa-solid fa-user" style="margin-right:6px;color:var(--acc)"></i>Account</div>
-      <button class="settings-row" onclick="editProfile();closeSettings()">
+      <button class="settings-row" data-action="editProfile">
         <div class="s-ico" style="background:#7C3AED22;color:#7C3AED"><i class="fa-solid fa-user-pen"></i></div>
         Edit Profile
         <i class="fa-solid fa-chevron-right" style="margin-left:auto;color:var(--t3);font-size:12px"></i>
       </button>
-      <button class="settings-row" onclick="changeAvatar();closeSettings()">
+      <button class="settings-row" data-action="changeAvatar">
         <div class="s-ico" style="background:#06B6D422;color:#06B6D4"><i class="fa-solid fa-camera"></i></div>
         Change Photo
         <i class="fa-solid fa-chevron-right" style="margin-left:auto;color:var(--t3);font-size:12px"></i>
       </button>
-      <button class="settings-row" onclick="openChangePassword()">
+      <button class="settings-row" data-action="openChangePassword">
         <div class="s-ico" style="background:#F59E0B22;color:#F59E0B"><i class="fa-solid fa-key"></i></div>
         Change Password
         <i class="fa-solid fa-chevron-right" style="margin-left:auto;color:var(--t3);font-size:12px"></i>
       </button>
-      <button class="settings-row" onclick="openLinkedAccounts()">
+      <button class="settings-row" data-action="openLinkedAccounts">
         <div class="s-ico" style="background:#EC489922;color:#EC4899"><i class="fa-solid fa-link"></i></div>
         Linked Accounts
         <i class="fa-solid fa-chevron-right" style="margin-left:auto;color:var(--t3);font-size:12px"></i>
@@ -391,22 +391,22 @@
 
       <!-- PRIVACY -->
       <div class="settings-sect-label"><i class="fa-solid fa-shield-halved" style="margin-right:6px;color:#22C55E"></i>Privacy & Security</div>
-      <button class="settings-row" onclick="openPrivacy()">
+      <button class="settings-row" data-action="openPrivacy">
         <div class="s-ico" style="background:#22C55E22;color:#22C55E"><i class="fa-solid fa-lock"></i></div>
         Privacy Settings
         <i class="fa-solid fa-chevron-right" style="margin-left:auto;color:var(--t3);font-size:12px"></i>
       </button>
-      <button class="settings-row" onclick="openBlockedUsers()">
+      <button class="settings-row" data-action="openBlockedUsers">
         <div class="s-ico" style="background:#EF444422;color:#EF4444"><i class="fa-solid fa-ban"></i></div>
         Blocked Accounts
         <i class="fa-solid fa-chevron-right" style="margin-left:auto;color:var(--t3);font-size:12px"></i>
       </button>
-      <button class="settings-row" onclick="openTwoFactor()">
+      <button class="settings-row" data-action="openTwoFactor">
         <div class="s-ico" style="background:#8B5CF622;color:#8B5CF6"><i class="fa-solid fa-mobile-screen"></i></div>
         Two-Factor Auth
         <span style="margin-left:auto;background:#EF444422;color:#EF4444;border-radius:99px;padding:2px 8px;font-size:11px;font-weight:600">Off</span>
       </button>
-      <button class="settings-row" onclick="openLoginActivity()">
+      <button class="settings-row" data-action="openLoginActivity">
         <div class="s-ico" style="background:#3B82F622;color:#3B82F6"><i class="fa-solid fa-clock-rotate-left"></i></div>
         Login Activity
         <i class="fa-solid fa-chevron-right" style="margin-left:auto;color:var(--t3);font-size:12px"></i>
@@ -414,25 +414,25 @@
 
       <!-- NOTIFICATIONS -->
       <div class="settings-sect-label"><i class="fa-solid fa-bell" style="margin-right:6px;color:#F59E0B"></i>Notifications</div>
-      <button class="settings-row" onclick="openNotifSettings()">
+      <button class="settings-row" data-action="openNotifSettings">
         <div class="s-ico" style="background:#F59E0B22;color:#F59E0B"><i class="fa-solid fa-bell"></i></div>
         Push Notifications
         <i class="fa-solid fa-chevron-right" style="margin-left:auto;color:var(--t3);font-size:12px"></i>
       </button>
-      <button class="settings-row" onclick="openEmailNotifs()">
+      <button class="settings-row" data-action="openEmailNotifs">
         <div class="s-ico" style="background:#06B6D422;color:#06B6D4"><i class="fa-solid fa-envelope"></i></div>
         Email Notifications
         <i class="fa-solid fa-chevron-right" style="margin-left:auto;color:var(--t3);font-size:12px"></i>
       </button>
 
-      <!-- MESSAGES (WhatsApp style) -->
+      <!-- MESSAGES -->
       <div class="settings-sect-label"><i class="fa-solid fa-message" style="margin-right:6px;color:#22C55E"></i>Messages</div>
-      <button class="settings-row" onclick="openChatSettings()">
+      <button class="settings-row" data-action="openChatSettings">
         <div class="s-ico" style="background:#22C55E22;color:#22C55E"><i class="fa-solid fa-comment-dots"></i></div>
         Chat Settings
         <i class="fa-solid fa-chevron-right" style="margin-left:auto;color:var(--t3);font-size:12px"></i>
       </button>
-      <button class="settings-row" onclick="openMediaAutoDownload()">
+      <button class="settings-row" data-action="openMediaAutoDownload">
         <div class="s-ico" style="background:#7C3AED22;color:#7C3AED"><i class="fa-solid fa-download"></i></div>
         Media Auto-Download
         <i class="fa-solid fa-chevron-right" style="margin-left:auto;color:var(--t3);font-size:12px"></i>
@@ -440,12 +440,12 @@
 
       <!-- APPEARANCE -->
       <div class="settings-sect-label"><i class="fa-solid fa-palette" style="margin-right:6px;color:#EC4899"></i>Appearance</div>
-      <button class="settings-row" onclick="toggleTheme();updateThemeBadge()">
+      <button class="settings-row" data-action="toggleThemeSettings">
         <div class="s-ico" style="background:#EC489922;color:#EC4899"><i class="fa-solid fa-circle-half-stroke"></i></div>
         Dark / Light Mode
         <span id="theme-badge" style="margin-left:auto;background:var(--c3);border-radius:99px;padding:3px 10px;font-size:12px;color:var(--t2)">Dark</span>
       </button>
-      <button class="settings-row" onclick="openLanguage()">
+      <button class="settings-row" data-action="openLanguage">
         <div class="s-ico" style="background:#3B82F622;color:#3B82F6"><i class="fa-solid fa-language"></i></div>
         Language
         <span style="margin-left:auto;font-size:13px;color:var(--t3)">English</span>
@@ -453,17 +453,17 @@
 
       <!-- CONTENT -->
       <div class="settings-sect-label"><i class="fa-solid fa-photo-film" style="margin-right:6px;color:#8B5CF6"></i>Content</div>
-      <button class="settings-row" onclick="goto('profile');switchGridTab(document.querySelectorAll('.gtab')[1],'saved');closeSettings()">
+      <button class="settings-row" data-action="openSavedPosts">
         <div class="s-ico" style="background:#8B5CF622;color:#8B5CF6"><i class="fa-solid fa-bookmark"></i></div>
         Saved Posts
         <i class="fa-solid fa-chevron-right" style="margin-left:auto;color:var(--t3);font-size:12px"></i>
       </button>
-      <button class="settings-row" onclick="openActivity()">
+      <button class="settings-row" data-action="openActivity">
         <div class="s-ico" style="background:#F59E0B22;color:#F59E0B"><i class="fa-solid fa-chart-line"></i></div>
         Your Activity
         <i class="fa-solid fa-chevron-right" style="margin-left:auto;color:var(--t3);font-size:12px"></i>
       </button>
-      <button class="settings-row" onclick="openArchivedPosts()">
+      <button class="settings-row" data-action="openArchivedPosts">
         <div class="s-ico" style="background:#6B728022;color:#6B7280"><i class="fa-solid fa-box-archive"></i></div>
         Archive
         <i class="fa-solid fa-chevron-right" style="margin-left:auto;color:var(--t3);font-size:12px"></i>
@@ -471,17 +471,17 @@
 
       <!-- SUPPORT -->
       <div class="settings-sect-label"><i class="fa-solid fa-circle-question" style="margin-right:6px;color:#06B6D4"></i>Help & Support</div>
-      <button class="settings-row" onclick="openHelp()">
+      <button class="settings-row" data-action="openHelp">
         <div class="s-ico" style="background:#06B6D422;color:#06B6D4"><i class="fa-solid fa-circle-question"></i></div>
         Help Center
         <i class="fa-solid fa-chevron-right" style="margin-left:auto;color:var(--t3);font-size:12px"></i>
       </button>
-      <button class="settings-row" onclick="openReport()">
+      <button class="settings-row" data-action="openReport">
         <div class="s-ico" style="background:#EF444422;color:#EF4444"><i class="fa-solid fa-flag"></i></div>
         Report a Problem
         <i class="fa-solid fa-chevron-right" style="margin-left:auto;color:var(--t3);font-size:12px"></i>
       </button>
-      <button class="settings-row" onclick="openAbout()">
+      <button class="settings-row" data-action="openAbout">
         <div class="s-ico" style="background:#7C3AED22;color:#7C3AED"><i class="fa-solid fa-circle-info"></i></div>
         About Flick
         <i class="fa-solid fa-chevron-right" style="margin-left:auto;color:var(--t3);font-size:12px"></i>
@@ -489,11 +489,11 @@
 
       <!-- DANGER -->
       <div class="settings-sect-label"><i class="fa-solid fa-triangle-exclamation" style="margin-right:6px;color:#EF4444"></i>Account Actions</div>
-      <button class="settings-row" onclick="confirmDeactivate()">
+      <button class="settings-row" data-action="confirmDeactivate">
         <div class="s-ico" style="background:#EF444422;color:#EF4444"><i class="fa-solid fa-user-slash"></i></div>
         <span style="color:#EF4444">Deactivate Account</span>
       </button>
-      <button class="settings-row danger" onclick="doLogout()" style="margin-bottom:20px">
+      <button class="settings-row danger" data-action="doLogout" style="margin-bottom:20px">
         <div class="s-ico" style="background:#EF444422;color:#EF4444"><i class="fa-solid fa-right-from-bracket"></i></div>
         Log Out
       </button>

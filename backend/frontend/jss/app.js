@@ -487,22 +487,6 @@ function openSettings() {
   var ov = document.getElementById('settings-overlay');
   ov.style.display = 'flex';
   ov.style.zIndex  = '1800';
-  /* Fix mobile touch - add touchend listeners to all settings buttons */
-  setTimeout(function() {
-    ov.querySelectorAll('.settings-row, button').forEach(function(btn) {
-      btn.style.cursor = 'pointer';
-      btn.style.webkitTapHighlightColor = 'rgba(124,58,237,0.2)';
-      /* Clone onclick as touchend for iOS */
-      if (btn.getAttribute('onclick') && !btn._touchFixed) {
-        btn._touchFixed = true;
-        var fn = btn.getAttribute('onclick');
-        btn.addEventListener('touchend', function(e) {
-          e.preventDefault();
-          try { eval(fn); } catch(err) {}
-        }, { passive: false });
-      }
-    });
-  }, 100);
 }
 function updateThemeBadge() {
   var badge = document.getElementById('theme-badge');
@@ -959,3 +943,36 @@ function openVideoCall(name) {
   );
   showToast('Video calls coming soon 📹');
 }
+
+/* ── SETTINGS BUTTON FIX ── */
+/* Delegate all settings button clicks via event listener */
+document.addEventListener('click', function(e) {
+  var btn = e.target.closest('[data-action]');
+  if (!btn) return;
+  var action = btn.getAttribute('data-action');
+  var fnMap = {
+    'editProfile':         function(){ editProfile(); closeSettings(); },
+    'changeAvatar':        function(){ changeAvatar(); closeSettings(); },
+    'openChangePassword':  openChangePassword,
+    'openLinkedAccounts':  openLinkedAccounts,
+    'openPrivacy':         openPrivacy,
+    'openBlockedUsers':    openBlockedUsers,
+    'openTwoFactor':       openTwoFactor,
+    'openLoginActivity':   openLoginActivity,
+    'openNotifSettings':   openNotifSettings,
+    'openEmailNotifs':     openEmailNotifs,
+    'toggleThemeSettings': function(){ toggleTheme(); updateThemeBadge(); },
+    'openLanguage':        openLanguage,
+    'openChatSettings':    openChatSettings,
+    'openMediaAutoDownload': openMediaAutoDownload,
+    'openActivity':        openActivity,
+    'openArchivedPosts':   openArchivedPosts,
+    'openHelp':            openHelp,
+    'openReport':          openReport,
+    'openAbout':           openAbout,
+    'confirmDeactivate':   confirmDeactivate,
+    'doLogout':            doLogout,
+    'openSavedPosts':      function(){ goto('profile'); closeSettings(); setTimeout(function(){ switchGridTab(document.querySelectorAll('.gtab')[1],'saved'); },300); },
+  };
+  if (fnMap[action]) { e.preventDefault(); fnMap[action](); }
+});
